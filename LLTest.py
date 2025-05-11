@@ -8,8 +8,18 @@ def main():
     my_LL.append(10)
 
     my_LL.printList()
-    
-    print(my_LL.length)
+
+    my_LL.delete(5)
+
+    my_LL.printList()
+
+    my_LL.delete(10)
+
+    my_LL.printList()
+
+    my_LL.delete(7)
+
+    my_LL.printList()
 
 if __name__ == '__main__':
     main()
