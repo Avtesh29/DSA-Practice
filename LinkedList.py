@@ -22,7 +22,7 @@ class LinkedList:
         self.length = 0
 
 
-    def append(self, val):
+    def append(self, val) -> LLNode:
         '''
         Append a node with speicified value to the end of the linked list,
         return node that was added.
@@ -33,16 +33,17 @@ class LinkedList:
             self.head = newNode
             self.tail = newNode
             self.length += 1
-            return
+            return newNode
         
         self.tail.next = newNode
         newNode.prev = self.tail    
         self.tail = newNode
 
         self.length += 1
+        return newNode
 
 
-    def find(self, val):
+    def find(self, val) -> LLNode:
         '''
         Find and return the first occurence of a node given a value,
         return None if node not found.
@@ -57,12 +58,14 @@ class LinkedList:
         return None
     
 
-    def delete(self, val):
+    def delete(self, val) -> LLNode:
         '''
         Delete the first occurence of a node from linked list,
         return the node or None if not found.
         '''
         delNode = self.find(val)
+        if not delNode:
+            return None
         
         if delNode == self.head:
             self.head = delNode.next
@@ -79,10 +82,45 @@ class LinkedList:
         
         self.length -= 1
         return delNode
+    
 
+    def insertAtIndex(self, index, val) -> bool:
+        '''
+        Insert node with value at a certain index if in bounds,
+        Return bool indicating success or failure
+        '''
+        if index < 0 or index >= self.length:
+            return False
 
+        if self.length == 0:
+            self.append(val)    # Append to empty list
+            return True
 
-    def printList(self):
+        newNode = LLNode(val)
+        curr = self.head
+
+        if index == 0:
+            newNode.next = curr
+            curr.prev = newNode
+            self.head = newNode
+            self.length += 1
+            return True
+
+        i = 0
+        while i < index:
+            curr = curr.next
+            i += 1
+        
+        curr.prev.next = newNode
+        newNode.prev = curr.prev
+        curr.prev = newNode
+        newNode.next = curr
+        self.length += 1
+        return True
+            
+        
+
+    def printList(self) -> None:
         '''
         Iterate through list and print every node's value,
         return nothing
