@@ -1,5 +1,5 @@
 
-all: clean List
+all: List
 
 List:
 	gcc -o List list.c

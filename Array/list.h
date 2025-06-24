@@ -1,13 +1,14 @@
 // Implementation of Python's built in List object, essentially a dynamic array
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 
 // List struct representing Python's List object with length and array properties,
 // array contains void* elements so that it can point to any type
 struct list{
-    int length;
     void** array;
+    int length;
 };
 typedef struct list list_t;
 
